@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT;
+const FRONTEND_URL = process.env.VITE_FRONTEND_URL;
 
 // In-memory storage (resets when the server restarts)
 let todos = [];
@@ -11,8 +15,8 @@ let nextId = 1;
 // Allow the React app on port 3000 to call this API
 app.use(
   cors({
-    origin: "http://localhost:3000",
-  })
+    origin: FRONTEND_URL,
+  }),
 );
 
 // Parse JSON bodies on POST requests

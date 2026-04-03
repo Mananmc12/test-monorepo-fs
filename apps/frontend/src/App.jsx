@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Backend URL (Express on port 5000)
-const API = "http://localhost:5000";
+const API = process.env.VITE_BACKEND_URL;
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
