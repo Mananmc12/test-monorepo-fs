@@ -4,88 +4,97 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: #f4f4f5;
-  color: #18181b;
+  font-family: system-ui, sans-serif;
+  background: #0f1419;
+  color: #e7e9ea;
+  min-height: 100vh;
 }
 
-.app {
-  max-width: 480px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+#root {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
 }
 
 h1 {
-  margin: 0 0 1rem;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
 }
 
-.row {
-  display: flex;
-  gap: 0.5rem;
+p.lead {
+  margin: 0 0 1.5rem;
+  color: #8b98a5;
+  font-size: 0.9rem;
+}
+
+.card {
+  background: #1a2332;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
   margin-bottom: 1rem;
+  border: 1px solid #2f3b4a;
 }
 
-input[type="text"] {
-  flex: 1;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #d4d4d8;
-  border-radius: 8px;
-  font-size: 1rem;
+.card h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8b98a5;
+  margin: 0 0 0.5rem;
 }
 
-button {
-  padding: 0.5rem 0.75rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  background: #2563eb;
-  color: #fff;
+.status {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: #6ee7b7;
 }
 
-button:hover {
-  background: #1d4ed8;
-}
-
-button.danger {
-  background: #dc2626;
-  padding: 0.35rem 0.6rem;
-  font-size: 0.875rem;
-}
-
-button.danger:hover {
-  background: #b91c1c;
+.status.err {
+  color: #fca5a5;
 }
 
 ul {
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding-left: 1.1rem;
 }
 
 li {
+  margin: 0.35rem 0;
+}
+
+form {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #e4e4e7;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
 }
 
-li:last-child {
-  border-bottom: none;
-}
-
-.error {
-  color: #dc2626;
-  font-size: 0.875rem;
-  margin-bottom: 0.75rem;
-}
-
-.empty {
-  color: #71717a;
+input {
+  flex: 1;
+  padding: 0.5rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid #2f3b4a;
+  background: #0f1419;
+  color: inherit;
   font-size: 0.95rem;
+}
+
+button {
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  border: none;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

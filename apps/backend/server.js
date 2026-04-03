@@ -1,61 +1,34 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT;
-const FRONTEND_URL = process.env.VITE_FRONTEND_URL;
+const PORT = process.env.PORT ?? 3001;
 
-// In-memory storage (resets when the server restarts)
-let todos = [];
-let nextId = 1;
-
-// Allow the React app on port 3000 to call this API
-app.use(
-  cors({
-    origin: FRONTEND_URL,
-  }),
-);
-
-// Parse JSON bodies on POST requests
+app.use(cors({ origin: ["http://localhost:5173", "http://127.0.0.1:5173"] }));
 app.use(express.json());
 
-// GET /todos — return all todos
-app.get("/todos", (req, res) => {
-  res.json(todos);
+let items = [
+  { id: "1", text: "First item from API" },
+  { id: "2", text: "Second item from API" },
+];
+
+app.get("/api/health", (_req, res) => {
+  res.json({ ok: true, service: "backend" });
 });
 
-// POST /todos — add a new todo (expects { "text": "..." })
-app.post("/todos", (req, res) => {
+app.get("/api/items", (_req, res) => {
+  res.json({ items });
+});
+
+app.post("/api/items", (req, res) => {
   const text = typeof req.body?.text === "string" ? req.body.text.trim() : "";
-
   if (!text) {
-    return res.status(400).json({ error: "Missing or empty 'text' field" });
+    return res.status(400).json({ error: "Missing or empty text" });
   }
-
-  const todo = { id: nextId++, text };
-  todos.push(todo);
-  res.status(201).json(todo);
-});
-
-// DELETE /todos/:id — remove a todo by id
-app.delete("/todos/:id", (req, res) => {
-  const id = Number(req.params.id);
-
-  if (Number.isNaN(id)) {
-    return res.status(400).json({ error: "Invalid id" });
-  }
-
-  const before = todos.length;
-  todos = todos.filter((t) => t.id !== id);
-
-  if (todos.length === before) {
-    return res.status(404).json({ error: "Todo not found" });
-  }
-
-  res.status(204).send();
+  const id = String(Date.now());
+  const item = { id, text };
+  items = [...items, item];
+  res.status(201).json({ item });
 });
 
 app.listen(PORT, () => {
